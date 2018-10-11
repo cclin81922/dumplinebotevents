@@ -16,6 +16,7 @@ package dumplinebotevents
 
 import (
 	"fmt"
+	"reflect"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -52,29 +53,7 @@ func Dump(e *linebot.Event) (s string) {
 		"\t" + `}` + "\n" +
 		`}`
 
-	eMessageType := "?"
-	switch e.Message.(type) {
-	case *linebot.TextMessage:
-		eMessageType = "TextMessage"
-	case *linebot.ImageMessage:
-		eMessageType = "ImageMessage"
-	case *linebot.VideoMessage:
-		eMessageType = "VideoMessage"
-	case *linebot.AudioMessage:
-		eMessageType = "AudioMessage"
-	case *linebot.FileMessage:
-		eMessageType = "FileMessage"
-	case *linebot.StickerMessage:
-		eMessageType = "StickerMessage"
-	case *linebot.LocationMessage:
-		eMessageType = "LocationMessage"
-	case *linebot.TemplateMessage:
-		eMessageType = "TemplateMessage"
-	case *linebot.ImagemapMessage:
-		eMessageType = "ImagemapMessage"
-	case *linebot.FlexMessage:
-		eMessageType = "FlexMessage"
-	}
+	eMessageType := reflect.TypeOf(e.Message)
 
 	s = fmt.Sprintf(template, e.ReplyToken, e.Type, e.Timestamp,
 		e.Source.Type, e.Source.UserID, e.Source.GroupID, e.Source.RoomID, eMessageType)
