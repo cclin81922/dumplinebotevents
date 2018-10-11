@@ -13,7 +13,7 @@ LineChannelSecret=... LineChannelToken=... dumplinebotevents
 // then you can use line to test
 ```
 
-// Package Usage
+# Package Usage
 
 ```
 import "github.com/cclin81922/dumplinebotevents/pkg/dumplinebotevents"
